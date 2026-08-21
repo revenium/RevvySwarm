@@ -102,8 +102,8 @@ context-window meter, and auto-generated session notes.
 ## Install
 
 1. **[Download the latest release](https://github.com/revenium/RevvySwarm/releases/latest)**
-   — grab the `RevvySwarm-vX.Y.Z-darwin.zip` asset.
-2. Expand it — double-click in Finder, or `ditto -x -k RevvySwarm-vX.Y.Z-darwin.zip .` from the
+   — grab the `RevvySwarm-darwin.zip` asset.
+2. Expand it — double-click in Finder, or `ditto -x -k RevvySwarm-darwin.zip .` from the
    command line. **Don't use `unzip`** — it can strip the code signature.
 3. Drag `RevvySwarm.app` to `/Applications` and launch it. The app is signed with a Developer ID
    and notarized by Apple, so Gatekeeper opens it normally with no right-click workaround needed.
@@ -118,11 +118,20 @@ repository — see [Contributing](CONTRIBUTING.md) for what's possible without a
 
 ## Updates
 
-New versions are published to this repository's [Releases
-page](https://github.com/revenium/RevvySwarm/releases). To update, download the latest
-release and repeat the install steps above — the new `.app` replaces the old one in
-`/Applications`. RevvySwarm does not currently update itself automatically; check the Releases
-page (or watch this repository) for new versions.
+RevvySwarm updates itself. It checks this repository's [Releases
+page](https://github.com/revenium/RevvySwarm/releases) shortly after launch and once a day
+after that, and shows a banner in the app when a new version is available. Nothing installs
+without you clicking: automatic installation is off by default, and you can turn checking off
+entirely in Settings → General.
+
+Before installing anything, the app verifies that the download's checksum matches the one
+GitHub publishes for that asset, that it is signed by Revenium's Apple Developer ID, and that
+it passes Gatekeeper. An update failing any of those checks is refused and your installed copy
+is left untouched. Your current app is set aside before it is replaced, and a failed swap is
+rolled back automatically, so an interrupted update can't leave you without an app.
+
+You can always update by hand instead — download the latest release and repeat the install
+steps above.
 
 ## Verifying a download
 
