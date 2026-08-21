@@ -148,7 +148,8 @@ redistribute, mirror, or resell it. It comes with no warranty and no support
 commitment, as Labs software does.
 
 Full terms: [LICENSE.md](LICENSE.md). Open-source components bundled inside the
-application remain under their own licences.
+application remain under their own licences — see
+[THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
 
 ---
 
