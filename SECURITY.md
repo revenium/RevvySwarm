@@ -55,16 +55,16 @@ built releases, because the source repository is private. Official releases publ
 
 ## Verify a downloaded release
 
-Download `RevvySwarm-vX.Y.Z-darwin.zip` from the [release page](https://github.com/revenium/RevvySwarm/releases),
+Download `RevvySwarm-darwin.zip` from the [release page](https://github.com/revenium/RevvySwarm/releases),
 then:
 
 1. Compare its checksum to the digest GitHub reports for that asset (shown on the release page,
    or via `gh release view <tag> --json assets`):
 
    ```bash
-   shasum -a 256 RevvySwarm-vX.Y.Z-darwin.zip
+   shasum -a 256 RevvySwarm-darwin.zip
    gh release view vX.Y.Z --repo revenium/RevvySwarm \
-     --json assets --jq '.assets[] | select(.name == "RevvySwarm-vX.Y.Z-darwin.zip") | .digest'
+     --json assets --jq '.assets[] | select(.name == "RevvySwarm-darwin.zip") | .digest'
    ```
 
    The two SHA-256 values must match.
@@ -73,7 +73,7 @@ then:
    carry the code signature, causing verification to fail even on a genuine download:
 
    ```bash
-   ditto -x -k RevvySwarm-vX.Y.Z-darwin.zip .
+   ditto -x -k RevvySwarm-darwin.zip .
    ```
 
 3. Verify the app's signature, notarization ticket, and Gatekeeper assessment before launching
