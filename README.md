@@ -24,7 +24,9 @@
   <sub>Run Claude Code, Codex, Gemini CLI, and OpenCode sessions side by side, see which ones
   need you, and never lose one to a closed terminal tab.</sub>
 
-  ### [Download Latest Release](https://github.com/revenium/revvyswarm-releases/releases/latest)
+  [![Licence](https://img.shields.io/badge/licence-proprietary%20(free%20to%20use)-blue?style=flat-square)](LICENSE.md)
+
+  ### [Download Latest Release](https://github.com/revenium/RevvySwarm/releases/latest)
 
   <sub>macOS · Signed and notarized</sub>
 </div>
@@ -99,7 +101,7 @@ context-window meter, and auto-generated session notes.
 
 ## Install
 
-1. **[Download the latest release](https://github.com/revenium/revvyswarm-releases/releases/latest)**
+1. **[Download the latest release](https://github.com/revenium/RevvySwarm/releases/latest)**
    — grab the `RevvySwarm-vX.Y.Z-darwin.zip` asset.
 2. Expand it — double-click in Finder, or `ditto -x -k RevvySwarm-vX.Y.Z-darwin.zip .` from the
    command line. **Don't use `unzip`** — it can strip the code signature.
@@ -117,7 +119,7 @@ repository — see [Contributing](CONTRIBUTING.md) for what's possible without a
 ## Updates
 
 New versions are published to this repository's [Releases
-page](https://github.com/revenium/revvyswarm-releases/releases). To update, download the latest
+page](https://github.com/revenium/RevvySwarm/releases). To update, download the latest
 release and repeat the install steps above — the new `.app` replaces the old one in
 `/Applications`. RevvySwarm does not currently update itself automatically; check the Releases
 page (or watch this repository) for new versions.
@@ -130,10 +132,23 @@ download is authentic before you run it.
 
 ## Getting help
 
-- **Bugs and feature requests:** [GitHub Issues](https://github.com/revenium/revvyswarm-releases/issues)
+- **Bugs and feature requests:** [GitHub Issues](https://github.com/revenium/RevvySwarm/issues)
   on this repository — see [CONTRIBUTING.md](CONTRIBUTING.md) for what to include.
 - **Questions, ideas, or just want to chat about it:** [Discord](https://discord.gg/J2DbmjZ2nA)
 - **Security issues:** see [SECURITY.md](SECURITY.md) — please don't file these as public issues.
+
+---
+
+## Licence
+
+RevvySwarm is **free to use, including commercially — but it is not open source.**
+Revenium retains all rights to it, and the application source is not published.
+You may install and use it on as many machines as you like; you may not
+redistribute, mirror, or resell it. It comes with no warranty and no support
+commitment, as Labs software does.
+
+Full terms: [LICENSE.md](LICENSE.md). Open-source components bundled inside the
+application remain under their own licences.
 
 ---
 

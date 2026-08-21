@@ -5,14 +5,14 @@
 Revenium provides security fixes for the latest release of RevvySwarm. Install the current
 version from:
 
-- [Revenium GitHub Releases](https://github.com/revenium/revvyswarm-releases/releases/latest)
+- [Revenium GitHub Releases](https://github.com/revenium/RevvySwarm/releases/latest)
 
 ## Report a vulnerability privately
 
 Do not open a public issue for a suspected vulnerability.
 
 Use this repository's
-[private security advisory form](https://github.com/revenium/revvyswarm-releases/security/advisories/new).
+[private security advisory form](https://github.com/revenium/RevvySwarm/security/advisories/new).
 If GitHub advisories are unavailable, email
 [support@revenium.io](mailto:support@revenium.io) with:
 
@@ -55,7 +55,7 @@ built releases, because the source repository is private. Official releases publ
 
 ## Verify a downloaded release
 
-Download `RevvySwarm-vX.Y.Z-darwin.zip` from the [release page](https://github.com/revenium/revvyswarm-releases/releases),
+Download `RevvySwarm-vX.Y.Z-darwin.zip` from the [release page](https://github.com/revenium/RevvySwarm/releases),
 then:
 
 1. Compare its checksum to the digest GitHub reports for that asset (shown on the release page,
@@ -63,7 +63,7 @@ then:
 
    ```bash
    shasum -a 256 RevvySwarm-vX.Y.Z-darwin.zip
-   gh release view vX.Y.Z --repo revenium/revvyswarm-releases \
+   gh release view vX.Y.Z --repo revenium/RevvySwarm \
      --json assets --jq '.assets[] | select(.name == "RevvySwarm-vX.Y.Z-darwin.zip") | .digest'
    ```
 
@@ -90,4 +90,4 @@ then:
    worked!` (stapler), and `accepted` with `source=Notarized Developer ID` (spctl).
 
 For non-security bugs, use
-[GitHub Issues](https://github.com/revenium/revvyswarm-releases/issues) on this repository.
+[GitHub Issues](https://github.com/revenium/RevvySwarm/issues) on this repository.

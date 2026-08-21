@@ -12,11 +12,11 @@ real usage are genuinely useful and read by the people building the app.
 
 ### Report a bug
 
-Before filing one, check [existing issues](https://github.com/revenium/revvyswarm-releases/issues)
+Before filing one, check [existing issues](https://github.com/revenium/RevvySwarm/issues)
 to avoid duplicates, and confirm you're on the latest release (Settings → About, or check the
-[Releases page](https://github.com/revenium/revvyswarm-releases/releases)).
+[Releases page](https://github.com/revenium/RevvySwarm/releases)).
 
-Open a [new issue](https://github.com/revenium/revvyswarm-releases/issues/new) and include:
+Open a [new issue](https://github.com/revenium/RevvySwarm/issues/new) and include:
 
 - **App version** — Settings → About in the desktop app
 - **macOS version** — Apple menu → About This Mac
@@ -35,7 +35,7 @@ for how to report it privately.
 
 ### Request a feature or improvement
 
-Open an [issue](https://github.com/revenium/revvyswarm-releases/issues) describing the problem
+Open an [issue](https://github.com/revenium/RevvySwarm/issues) describing the problem
 you're trying to solve, not just the feature you have in mind — the "why" helps us evaluate
 whether it fits the tool and how urgently. Check existing issues first so we can consolidate
 related requests.
