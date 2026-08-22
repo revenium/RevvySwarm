@@ -14,7 +14,7 @@ Do not open a public issue for a suspected vulnerability.
 Use this repository's
 [private security advisory form](https://github.com/revenium/RevvySwarm/security/advisories/new).
 If GitHub advisories are unavailable, email
-[support@revenium.io](mailto:support@revenium.io) with:
+[security@revenium.io](mailto:security@revenium.io) with:
 
 - A description of the issue and its impact
 - Reproduction steps or a proof of concept

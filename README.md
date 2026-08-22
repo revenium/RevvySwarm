@@ -21,8 +21,8 @@
 
   **A terminal session manager for AI coding agents — with a native macOS app on top**
 
-  <sub>Run Claude Code, Codex, Gemini CLI, and OpenCode sessions side by side, see which ones
-  need you, and never lose one to a closed terminal tab.</sub>
+  <sub>Run Claude Code and Codex CLI sessions side by side, see which ones need you,
+  and never lose one to a closed terminal tab.</sub>
 
   [![Licence](https://img.shields.io/badge/licence-proprietary%20(free%20to%20use)-blue?style=flat-square)](LICENSE.md)
 
@@ -66,9 +66,13 @@ There are two ways to use it:
   in the current session, skipping the tool calls and output in between.
 - **Split panes** — work on multiple sessions side by side, save layout templates, zoom any pane
   full-screen.
-- **Searchable session history** — every past Claude Code conversation is indexed and
+- **Searchable session history** — past Claude Code and Codex CLI conversations are indexed and
   searchable by content, project, branch, and date, with AI-generated summaries so you can scan
-  what a session was about at a glance. Resume any past session in one click.
+  what a session was about at a glance. Resume or fork a past session in one click.
+- **Recovery and remote resilience** — resume stopped sessions one at a time or in bulk, and
+  safely reconnect to or restart remote sessions.
+- **Claude Code compatibility repair** — detects and guides repair for the fullscreen-TUI
+  scrollback issue, so your terminal history remains usable.
 - **Command palette (`Cmd+K`)** — switch sessions, launch a project, manage layouts, or run
   actions without touching the mouse.
 - **Live context bar** — auto-detects GitHub PRs, Linear-style ticket IDs, dev server URLs, and
@@ -82,22 +86,28 @@ There are two ways to use it:
 | Tool | Status detection | Session resume | Fork | MCP management |
 |------|-------------------|-----------------|------|-----------------|
 | **Claude Code** | Running, waiting, blocked, idle, error | Yes (session ID) | Yes | Yes |
-| **Gemini CLI** | Running, waiting, idle | Yes (session ID) | No | Yes |
-| **OpenCode** | Running, waiting, idle | Yes (session ID) | No | No |
-| **Codex / Cursor** | Basic prompt detection | No | No | No |
-| **Shell / any CLI** | Prompt detection | N/A | N/A | N/A |
+| **Codex CLI** | Tool-aware status and permission detection | Yes | Yes | Yes |
+| **Gemini CLI*** | Running, waiting, idle | Yes (session ID) | No | Basic, where compatible |
+| **OpenCode*** | Running, waiting, idle | Yes (session ID) | No | No |
+| **Cursor / shell / any CLI** | Prompt detection | N/A | N/A | N/A |
 
-Claude Code has the deepest integration: automatic session ID capture, conversation forking, a
-context-window meter, and auto-generated session notes.
+Claude Code and Codex CLI are maintained, fully integrated experiences. Claude Code includes
+automatic session ID capture, conversation forking, a context-window meter, and auto-generated
+session notes. Codex CLI includes history search and summaries, native resume and fork, MCP
+management, and restoration of captured model and effort settings.
+
+\* Gemini CLI and OpenCode are best-effort compatibility integrations. They are not actively
+maintained or regularly compatibility-tested.
 
 ## Requirements
 
 - **macOS** for the desktop app (the underlying CLI and TUI also run on Linux and WSL, but this
   repository distributes the macOS app)
 - **[tmux](https://github.com/tmux/tmux)** — `brew install tmux`
-- At least one supported AI coding tool installed and signed in: [Claude
-  Code](https://docs.anthropic.com/en/docs/claude-code), the `codex` CLI, [Gemini
-  CLI](https://github.com/google-gemini/gemini-cli), or [OpenCode](https://github.com/opencode-ai/opencode)
+- At least one maintained AI coding tool installed and signed in: [Claude
+  Code](https://docs.anthropic.com/en/docs/claude-code) or the `codex` CLI
+- Optional, best-effort compatibility integrations: [Gemini
+  CLI](https://github.com/google-gemini/gemini-cli) and [OpenCode](https://github.com/opencode-ai/opencode)
 
 ## Install
 
@@ -105,8 +115,7 @@ context-window meter, and auto-generated session notes.
    — grab the `RevvySwarm-darwin.zip` asset.
 2. Expand it — double-click in Finder, or `ditto -x -k RevvySwarm-darwin.zip .` from the
    command line. **Don't use `unzip`** — it can strip the code signature.
-3. Drag `RevvySwarm.app` to `/Applications` and launch it. The app is signed with a Developer ID
-   and notarized by Apple, so Gatekeeper opens it normally with no right-click workaround needed.
+3. Drag `RevvySwarm.app` to `/Applications` and launch it.
 4. Install tmux if you haven't already: `brew install tmux`.
 
 On first launch, RevvySwarm installs its CLI, sets up Claude Code integration (hooks for
@@ -115,23 +124,6 @@ session.
 
 Want to build it yourself instead? The application source lives in a private Revenium
 repository — see [Contributing](CONTRIBUTING.md) for what's possible without access to it.
-
-## Updates
-
-RevvySwarm updates itself. It checks this repository's [Releases
-page](https://github.com/revenium/RevvySwarm/releases) shortly after launch and once a day
-after that, and shows a banner in the app when a new version is available. Nothing installs
-without you clicking: automatic installation is off by default, and you can turn checking off
-entirely in Settings → General.
-
-Before installing anything, the app verifies that the download's checksum matches the one
-GitHub publishes for that asset, that it is signed by Revenium's Apple Developer ID, and that
-it passes Gatekeeper. An update failing any of those checks is refused and your installed copy
-is left untouched. Your current app is set aside before it is replaced, and a failed swap is
-rolled back automatically, so an interrupted update can't leave you without an app.
-
-You can always update by hand instead — download the latest release and repeat the install
-steps above.
 
 ## Verifying a download
 
