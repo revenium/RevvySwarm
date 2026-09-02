@@ -120,9 +120,10 @@ In the latest release:
   from Slack itself.
 - **Pane splits moved to `Cmd+\` and `Cmd+Shift+\`.** They previously lived on `Cmd+D` and
   `Cmd+Shift+D`, which now open the Documents drawer/tab instead.
-- **First-run improvements.** RevvySwarm now explains up front why it's asking for Full Disk
-  Access — it needs to read session data belonging to Claude Code and Codex, which macOS treats
-  as another app's data — instead of just failing silently if you say no.
+- **First-run improvements.** RevvySwarm now explains up front why it asks for Full Disk
+  Access: without it, macOS shows an "access data from other apps" pop-up every time RevvySwarm
+  reads Claude Code's or Codex's session files. Granting it stops the pop-ups; you can dismiss
+  the prompt and grant it later from System Settings.
 
 ## Supported AI tools
 
@@ -183,9 +184,9 @@ The full shortcut list is available in the app any time with `Cmd+/`.
 
 On first launch, RevvySwarm installs its CLI, sets up Claude Code and Codex integration (hooks
 for auto-notes, session status, and a status line for the context meter), and walks you through
-adding your first session. It will also ask for Full Disk Access — it needs this to read session
-data that Claude Code and Codex store under macOS's protection as "another app's data"; you can
-say no and use RevvySwarm without it, with reduced session discovery.
+adding your first session. It will also ask for Full Disk Access: without it, macOS shows an
+"access data from other apps" pop-up each time RevvySwarm reads Claude Code's or Codex's session
+files. Everything still works if you decline; granting it just stops the pop-ups.
 
 Want to build it yourself instead? The application source lives in a private Revenium
 repository — see [Contributing](CONTRIBUTING.md) for what's possible without access to it.
