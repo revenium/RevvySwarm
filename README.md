@@ -85,7 +85,7 @@ There are two ways to use it:
 - **Git worktree support** — create a session in a new worktree/branch directly from the CLI.
 - **Mobile access** — `revvy-swarm serve` hosts an installable web app so you can monitor and
   interact with sessions from your phone.
-- **Decision Inbox (optional)** — agents can raise a structured question with options and a
+- **Decision Inbox** — agents can raise a structured question with options and a
   recommendation instead of blocking mid-conversation, and you answer it from one place — even
   pushed to your phone over Slack when you're away. See [What's new](#whats-new) below.
 
@@ -107,12 +107,14 @@ In the latest release:
   done) is now driven by hooks Claude Code and Codex fire on real lifecycle events, plus explicit
   "done" and "paused" signals agents can send themselves — more accurate than just watching what
   the pane's text looks like. On by default.
-- **Decision Inbox (off by default).** A "decision card" is a structured question an agent raises
-  for you — a question, a couple of options, and a recommendation — instead of stopping and
-  waiting mid-conversation. You answer it from the Inbox drawer or tab (`Cmd+Shift+I`) in the
-  desktop app, from the mobile web app, or from the CLI, whenever it's convenient. Turn it on
-  from Settings → Decisions (a restart is required).
-- **Slack push notifications for the Decision Inbox.** With the Inbox on, an Away/Present toggle
+- **Decision Inbox.** A "decision card" is a structured question an agent raises for you — a
+  question, a couple of options, and a recommendation — instead of stopping and waiting
+  mid-conversation. You answer it from the Inbox drawer or tab (`Cmd+Shift+I`) in the desktop
+  app, from the mobile web app, or from the CLI, whenever it's convenient. It's on by default; a
+  small hook also nudges Claude Code, once per turn, to raise a card instead of ending a turn on
+  an open question for you. Turn the whole feature off from Settings → Decisions (a restart is
+  required).
+- **Slack push notifications for the Decision Inbox.** Once Slack is set up, an Away/Present toggle
   in the desktop app's top bar controls whether new cards also get pushed to your phone as a
   Slack DM with tap-to-answer buttons. Each person sets up their own Slack app through an
   in-app wizard in Settings → Decisions — nothing is shared between users. A
@@ -158,7 +160,7 @@ maintained or regularly compatibility-tested.
 | `Cmd+Shift+\` | Split pane down |
 | `Cmd+Up` / `Cmd+Down` | Jump between prompts |
 | `Cmd+Shift+F` | Search past sessions |
-| `Cmd+Shift+I` | Decision Inbox (once turned on in Settings) |
+| `Cmd+Shift+I` | Decision Inbox |
 
 The full shortcut list is available in the app any time with `Cmd+/`.
 
