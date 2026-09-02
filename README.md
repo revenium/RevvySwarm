@@ -57,11 +57,16 @@ There are two ways to use it:
 ## Key features
 
 - **Instant context switching** — tabbed interface with `Cmd+1–9` hotkeys in the desktop app.
-- **Know what every agent is doing** — color-coded status (running / waiting / blocked / idle),
-  activity ribbons showing how long a session has been waiting, and a flashing alert when an
-  agent needs your attention.
-- **Full terminal emulation** — xterm.js with searchable scrollback (`Cmd+F`), true color, and
-  clickable links, backed by real tmux sessions so nothing is lost if the app closes.
+- **Know what every agent is doing** — color-coded status (running / waiting / blocked / idle)
+  is driven by hooks Claude Code and Codex fire on real lifecycle events, so "done" means done,
+  not just "the pane went quiet." Activity ribbons show how long a session has been waiting, and
+  a flashing alert lets you know when an agent needs your attention.
+- **Full terminal emulation** — xterm.js with searchable scrollback (`Cmd+F`), smooth continuous
+  scrolling, true color, and clickable links, backed by real tmux sessions so nothing is lost if
+  the app closes. Local and SSH sessions both get real native terminal scrollback.
+- **Session Documents drawer (`Cmd+D`)** — every file a session created, edited, published,
+  shared, or mentioned, gathered in one list per session, with quick actions to open it, reveal
+  it in Finder, copy its path, hide it, or pin it. Works for remote (SSH) sessions too.
 - **Prompt navigation** — `Cmd+Up` / `Cmd+Down` jumps between every message you've sent an agent
   in the current session, skipping the tool calls and output in between.
 - **Split panes** — work on multiple sessions side by side, save layout templates, zoom any pane
@@ -80,6 +85,44 @@ There are two ways to use it:
 - **Git worktree support** — create a session in a new worktree/branch directly from the CLI.
 - **Mobile access** — `revvy-swarm serve` hosts an installable web app so you can monitor and
   interact with sessions from your phone.
+- **Decision Inbox (optional)** — agents can raise a structured question with options and a
+  recommendation instead of blocking mid-conversation, and you answer it from one place — even
+  pushed to your phone over Slack when you're away. See [What's new](#whats-new) below.
+
+## What's new
+
+In the latest release:
+
+- **Real native terminal scrollback and smooth scrolling.** RevvySwarm now talks to tmux over
+  its native control-mode wire protocol instead of screen-scraping a terminal, which means
+  smoother, continuous scrolling and faster tab switching. It's on by default and works for both
+  local and SSH sessions; if setup for a given tab fails for any reason, that tab automatically
+  falls back to the older approach so you're never stuck. To turn it off everywhere, set
+  `[features] control_mode_transport = false` in `~/.revvy-swarm/config.toml`.
+- **Session Documents drawer (`Cmd+D`).** Every file a session touched — created, edited,
+  published, shared, or just mentioned in conversation — now shows up in one list per session.
+  Open it, reveal it in Finder, copy its path, hide it, or pin it. Press `Cmd+Shift+D` to expand
+  it into a full tab. On by default.
+- **Hook-driven status.** The colored status dot for each session (running / waiting / idle /
+  done) is now driven by hooks Claude Code and Codex fire on real lifecycle events, plus explicit
+  "done" and "paused" signals agents can send themselves — more accurate than just watching what
+  the pane's text looks like. On by default.
+- **Decision Inbox (off by default).** A "decision card" is a structured question an agent raises
+  for you — a question, a couple of options, and a recommendation — instead of stopping and
+  waiting mid-conversation. You answer it from the Inbox drawer or tab (`Cmd+Shift+I`) in the
+  desktop app, from the mobile web app, or from the CLI, whenever it's convenient. Turn it on
+  from Settings → Decisions (a restart is required).
+- **Slack push notifications for the Decision Inbox.** With the Inbox on, an Away/Present toggle
+  in the desktop app's top bar controls whether new cards also get pushed to your phone as a
+  Slack DM with tap-to-answer buttons. Each person sets up their own Slack app through an
+  in-app wizard in Settings → Decisions — nothing is shared between users. A
+  `/revvyswarm alert|quiet|status` Slack command lets you flip Away/Present and check status
+  from Slack itself.
+- **Pane splits moved to `Cmd+\` and `Cmd+Shift+\`.** They previously lived on `Cmd+D` and
+  `Cmd+Shift+D`, which now open the Documents drawer/tab instead.
+- **First-run improvements.** RevvySwarm now explains up front why it's asking for Full Disk
+  Access — it needs to read session data belonging to Claude Code and Codex, which macOS treats
+  as another app's data — instead of just failing silently if you say no.
 
 ## Supported AI tools
 
@@ -99,11 +142,31 @@ management, and restoration of captured model and effort settings.
 \* Gemini CLI and OpenCode are best-effort compatibility integrations. They are not actively
 maintained or regularly compatibility-tested.
 
+## Keyboard shortcuts you'll use first
+
+| Shortcut | Action |
+|----------|--------|
+| `Cmd+1–9` | Switch to tab N |
+| `Cmd+T` | New tab |
+| `Cmd+N` | New session |
+| `Cmd+K` | Command palette |
+| `Cmd+F` | Find in terminal |
+| `Cmd+D` | Session Documents drawer |
+| `Cmd+Shift+D` | Expand Session Documents to a tab |
+| `Cmd+\` | Split pane right |
+| `Cmd+Shift+\` | Split pane down |
+| `Cmd+Up` / `Cmd+Down` | Jump between prompts |
+| `Cmd+Shift+F` | Search past sessions |
+| `Cmd+Shift+I` | Decision Inbox (once turned on in Settings) |
+
+The full shortcut list is available in the app any time with `Cmd+/`.
+
 ## Requirements
 
 - **macOS** for the desktop app (the underlying CLI and TUI also run on Linux and WSL, but this
   repository distributes the macOS app)
-- **[tmux](https://github.com/tmux/tmux)** — `brew install tmux`
+- **[tmux](https://github.com/tmux/tmux)** — `brew install tmux`. Use a reasonably recent
+  version; the terminal transport RevvySwarm uses depends on tmux's control-mode protocol.
 - At least one maintained AI coding tool installed and signed in: [Claude
   Code](https://docs.anthropic.com/en/docs/claude-code) or the `codex` CLI
 - Optional, best-effort compatibility integrations: [Gemini
@@ -118,9 +181,11 @@ maintained or regularly compatibility-tested.
 3. Drag `RevvySwarm.app` to `/Applications` and launch it.
 4. Install tmux if you haven't already: `brew install tmux`.
 
-On first launch, RevvySwarm installs its CLI, sets up Claude Code integration (hooks for
-auto-notes, a status line for the context meter), and walks you through adding your first
-session.
+On first launch, RevvySwarm installs its CLI, sets up Claude Code and Codex integration (hooks
+for auto-notes, session status, and a status line for the context meter), and walks you through
+adding your first session. It will also ask for Full Disk Access — it needs this to read session
+data that Claude Code and Codex store under macOS's protection as "another app's data"; you can
+say no and use RevvySwarm without it, with reduced session discovery.
 
 Want to build it yourself instead? The application source lives in a private Revenium
 repository — see [Contributing](CONTRIBUTING.md) for what's possible without access to it.
