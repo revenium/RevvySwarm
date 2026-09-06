@@ -76,8 +76,10 @@ There are two ways to use it:
   what a session was about at a glance. Resume or fork a past session in one click.
 - **Recovery and remote resilience** — resume stopped sessions one at a time or in bulk, and
   safely reconnect to or restart remote sessions.
-- **Claude Code compatibility repair** — detects and guides repair for the fullscreen-TUI
-  scrollback issue, so your terminal history remains usable.
+- **Fullscreen Claude Code support** — runs Claude Code's fullscreen renderer directly, with
+  working mouse wheel, scrollbar, and Page Up/Down scrolling, both locally and over SSH. To stay
+  on the older classic renderer instead, set `[features] claude_fullscreen = false` in
+  `~/.revvy-swarm/config.toml`.
 - **Command palette (`Cmd+K`)** — switch sessions, launch a project, manage layouts, or run
   actions without touching the mouse.
 - **Live context bar** — auto-detects GitHub PRs, Linear-style ticket IDs, dev server URLs, and
@@ -91,7 +93,28 @@ There are two ways to use it:
 
 ## What's new
 
-In the latest release:
+**In 1.2.0:**
+
+- **Fullscreen Claude Code sessions, on by default.** Claude Code sessions that run in
+  fullscreen mode now render properly in RevvySwarm, with working mouse wheel, scrollbar, and
+  Page Up/Down scrolling, both locally and over SSH. To stay on the older classic renderer
+  instead, set `[features] claude_fullscreen = false` in `~/.revvy-swarm/config.toml`.
+- **Native blocked-session notifications, on by default.** When a session sits on a permission
+  prompt while RevvySwarm isn't the front app, you get a macOS notification naming that session
+  — including sessions running on a remote Mac. Clicking it brings the app forward on that tab.
+  Turn it off with `native_alerts = false` in `~/.revvy-swarm/config.toml`.
+- **Redesigned session list.** Each row now gives the session name its own full line, with
+  status, project/branch, age, and markers on an aligned second line. Filter by status or tool
+  (`status:blocked`, `tool:codex`) from the filter button.
+- **`revvy-swarm doctor`.** A new CLI command that reports whether all of RevvySwarm's install
+  hooks are actually wired up, and each session's last hook status, without changing anything.
+- **Config backups and restore.** `~/.revvy-swarm/config.toml` now keeps rotated backups on
+  every write; `revvy-swarm config restore` brings one back if the live file gets corrupted.
+- **Claude launch command field.** Settings → Launch Configs now has a "Claude command" field
+  to set the wrapper command every Claude launch uses, instead of hand-editing config.toml —
+  and every way of starting a session now honors it, not just resume/restart.
+
+**In 1.1.0:**
 
 - **Real native terminal scrollback and smooth scrolling.** RevvySwarm now talks to tmux over
   its native control-mode wire protocol instead of screen-scraping a terminal, which means
