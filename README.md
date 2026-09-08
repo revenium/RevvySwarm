@@ -93,6 +93,34 @@ There are two ways to use it:
 
 ## What's new
 
+**In 1.3.0:**
+
+- **Your status line is yours now.** RevvySwarm no longer rewrites a Claude Code status line
+  script it didn't write — anything that would replace a script you've edited, or change
+  `settings.json`, is only ever asked for, never applied silently. On your first launch after
+  upgrading, a bar in the app offers to refresh the status line script that shows your context
+  usage: **Apply** takes the fix, **Keep mine** leaves your script alone for good, and **Show
+  detail** shows exactly what would change. Closing the bar without choosing asks again next
+  launch. There's a new **Settings → General → Status Line** option (and `[claude]
+  statusline_mode` in `~/.revvy-swarm/config.toml`) with three modes: `managed` (the previous
+  behavior), `wrap` (never change your script's contents), or `off` (never touch
+  `settings.json` at all).
+- **GPU-accelerated terminal rendering, on by default.** This is the biggest remaining fix for
+  typing lag in fullscreen TUIs. If a GPU isn't available, a pane falls back to the old renderer
+  automatically. Turn it off from **Settings → Terminal → "GPU-accelerated rendering"** (restart
+  required).
+- **Tabs and windows come back.** Every window, its tabs, their order, split panes, and the
+  selected tab are restored after a quit, crash, or upgrade, as sessions reconnect. Closing a
+  secondary window on purpose still removes it from the next launch.
+- **`Cmd+F` and scrolling reach your full session history again.** A regression since 1.2.0 had
+  a tab loading only the newest ~3,000 lines; it now loads up to your Scrollback setting, 50,000
+  lines by default.
+- **Typing fixes.** Characters no longer arrive out of order under load, and the first key after
+  a pause no longer stalls. Also fixed: a doubled status ribbon on SSH panes right after attach,
+  a ghost row above your first keystroke after reattaching, panes left cut off or overlapping by
+  stale size pins from older builds, and Claude's status footer showing up mid-transcript after
+  a slow tab switch.
+
 **In 1.2.0:**
 
 - **Fullscreen Claude Code sessions, on by default.** Claude Code sessions that run in
